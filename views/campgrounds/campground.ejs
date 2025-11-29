@@ -1,42 +1,50 @@
 <% layout("./layouts/boiler.ejs") %>
 <div class="container">
-    <h1 class="page-title">Campgrounds</h1>
-    <ul class="campground-list">
-        <% for( let index of backgrounds) { %>
-            <li class="campground-item">
-                <img src="<%=index.image%>" alt="Image for <%=index.title%>">
-                <p class="camp-title">TITLE: <%= index.title %></p>
-                <div class="button-group">
-                    <form action="/campgrounds/<%= index._id %>" method="get">
-                        <button class="btn-visit">Visit</button>
-                    </form>
-                    <% if (result && accessUser._id.toString() === index.author._id.toString()) { %>
+  <h1 class="page-title">Campgrounds</h1>
+  <ul class="campground-list">
+    <% 
+      // prefer accessUser (if you passed it) or currentUser (if you set it in res.locals)
+      const userFromReq = (typeof accessUser !== 'undefined') ? accessUser : (typeof currentUser !== 'undefined' ? currentUser : null);
+    %>
 
-                    <form action="/campgrounds/edit/<%= index._id %>">
-                        <button class="btn-edit">Edit</button>
-                    </form>
-                    <form action="/campgrounds/delete/<%= index._id %>?_method=DELETE" method="post">
-                        <button class="btn-delete">Delete</button>
-                    </form>
-                    <% } %>
-                </div>
-            </li>
-        <% } %>
-    </ul>
-    <% if(result) { %>
-    <form action="/campgrounds/new" method="get">
-        <button class="btn-add">Add New Campground</button>
-    </form>
+    <% for (let index of backgrounds) { 
+         // safe check whether the current user is the author of this campground
+         let isAuthor = false;
+         if (result && userFromReq && index && index.author) {
+           const userId = userFromReq._id ? userFromReq._id.toString() : (typeof userFromReq === 'string' ? userFromReq : null);
+           const authorId = index.author._id ? index.author._id.toString() : (typeof index.author === 'string' ? index.author : null);
+           isAuthor = !!(userId && authorId && userId === authorId);
+         }
+    %>
+      <li class="campground-item">
+        <img src="<%= index.image %>" alt="Image for <%= index.title %>">
+        <p class="camp-title">TITLE: <%= index.title %></p>
+        <div class="button-group">
+          <form action="/campgrounds/<%= index._id %>" method="get">
+            <button class="btn-visit">Visit</button>
+          </form>
+
+          <% if (isAuthor) { %>
+            <form action="/campgrounds/edit/<%= index._id %>" method="get">
+              <button class="btn-edit">Edit</button>
+            </form>
+            <form action="/campgrounds/delete/<%= index._id %>?_method=DELETE" method="post">
+              <button class="btn-delete">Delete</button>
+            </form>
+          <% } %>
+        </div>
+      </li>
     <% } %>
-    <!-- Added in NavBar -->
-     <!-- if (result) {
-        <form action="/logout" method="get">
-            <button>LogOut</button>
-        </form>
-         } 
-     if (!result) { 
-        <form action="/login" method="get">
-            <button>Login</button>
-        </form>
-     }  -->
+  </ul>
+
+  <% if (result) { %>
+    <form action="/campgrounds/new" method="get">
+      <button class="btn-add">Add New Campground</button>
+    </form>
+  <% } %>
+
+  <!--
+    Nav buttons are handled in the navbar; kept here as comments for reference:
+    if (result) show logout; else show login
+  -->
 </div>
