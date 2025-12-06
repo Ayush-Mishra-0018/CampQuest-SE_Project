@@ -67,7 +67,7 @@ The frontend uses EJS templates rendered from this backend, with Bootstrap-based
     campgrounds/        # Campground-related views
     User/               # Login and registration views
     errors.ejs          # Generic error view
-  uploads/              # Uploaded images (if enabled)
+  
 ```
 
 ---
