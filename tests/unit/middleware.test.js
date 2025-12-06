@@ -1,6 +1,6 @@
 const { isLogin, storeReturnTo, hasPermission, canUpdateReview } = require('../../middleware');
 
-// Create simple mock objects for req, res, next
+
 const createMockReq = (overrides = {}) => ({
   isAuthenticated: jest.fn().mockReturnValue(false),
   session: {},
@@ -18,9 +18,7 @@ const createMockRes = () => ({
 
 const createNext = () => jest.fn();
 
-// Mock Background and Review models used in middleware.
-// Use jest.mock factory functions that create the mock objects,
-// which is compatible with Jest's restrictions.
+
 jest.mock('../../Models/Background', () => ({
   findById: jest.fn(),
 }));
