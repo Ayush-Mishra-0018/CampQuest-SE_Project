@@ -291,10 +291,9 @@ Time:        ~10 seconds
 
 3. **Set up environment variables**
 
-   - Create a `.env` file (if not already present) in `YELPCAMP/` with values for:
-     - `MONGO_URI` – MongoDB connection string
-     - `SECRET` – Session secret for Express-session
-   - Make sure a MongoDB instance is running and accessible from `MONGO_URI`.
+   - Create a `.env` file (if not already present) in project root directory with values for:
+     - `MONGO_URI` –//127.0.0.1:23017/YELPCAMP
+   - Make sure a MongoDB instance is running and accessible at this address.
 
 4. **Seed the database (optional, for sample data)**
 
