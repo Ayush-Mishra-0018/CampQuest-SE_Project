@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express=require("express")
 const mongoose=require("mongoose")
 const Joi=require("joi")
@@ -15,14 +16,15 @@ const localpassport=require("passport-local");
 const User=require("./Models/User");
 const userRouter=require("./Routers/user");
 
-(async ()=>{
-    try{
-await mongoose.connect('mongodb://127.0.0.1:27017/YELPCAMP')
-console.log("DATABASE IS SETUP ✅");
-}
-catch(e){
-    console.log("❌ Database Connection Failed:", e.message);
-}})();
+
+(async () => {
+    try {
+        await mongoose.connect(process.env.MONGO_URI);
+        console.log("DATABASE IS SETUP ✅");
+    } catch (e) {
+        console.log("❌ Database Connection Failed:", e.message);
+    }
+})();
 
 
 
