@@ -28,6 +28,8 @@ The frontend uses EJS templates rendered from this backend, with Bootstrap-based
 ## 📁 Repository Structure
 
 ```text
+  .env                  # Environment variables (MongoDB URI)
+  node_modules/         # Project dependencies
   index.js              # Main Express application entry point
   jest.config.js        # Jest configuration for tests
   middleware.js         # Custom authentication & authorization middleware
@@ -291,9 +293,9 @@ Time:        ~10 seconds
 
 3. **Set up environment variables**
 
-    - Create a `.env` file (if not already present) in project root directory with values for:
-     - `MONGO_URI` –//127.0.0.1:23017/YELPCAMP
-     - Make sure a MongoDB instance is running and accessible at this address
+   - Create a `.env` file (if not already present) in project root directory with values for:
+     - `MONGO_URI` –mongodb://127.0.0.1:23017/YELPCAMP
+   - Make sure a MongoDB instance is running and accessible at this address.
 
 4. **Seed the database (optional, for sample data)**
 
