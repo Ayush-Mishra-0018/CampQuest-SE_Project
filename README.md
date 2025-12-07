@@ -294,7 +294,9 @@ Time:        ~10 seconds
 3. **Set up environment variables**
 
    - Create a `.env` file (if not already present) in project root directory with values for:
-     - `MONGO_URI` –mongodb://127.0.0.1:23017/YELPCAMP
+     ```
+     MONGODB_URI="mongodb://127.0.0.1:{the_port_where_you_installed_mongodb}/YELPCAMP"
+     ```
    - Make sure a MongoDB instance is running and accessible at this address.
 
 4. **Seed the database (optional, for sample data)**
